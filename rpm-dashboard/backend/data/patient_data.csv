@@ -1,0 +1,18 @@
+patient_id,timestamp,sensor_id,sensor_type,temperature,systolic_bp,diastolic_bp,heart_rate,device_battery,target_bp,target_hr,target_health_status,battery_level
+8270,2025-11-12 10:05:00,4,Temperature,36.8,150,95,84,99,140,90,Unhealthy,80
+1860,2025-11-12 10:07:00,1,Battery,37.3,150,95,77,84,140,90,Unhealthy,94
+6390,2025-11-12 10:10:00,1,Temperature,36.5,140,85,99,93,130,80,Healthy,84
+6191,2025-11-12 10:12:00,4,Battery,37.3,120,80,67,95,150,90,Unhealthy,92
+6734,2025-11-12 10:14:00,4,Temperature,36.8,90,60,98,97,120,80,Unhealthy,87
+7265,2025-11-12 10:16:00,3,Battery,36.6,120,85,99,86,120,90,Unhealthy,87
+1466,2025-11-12 10:18:00,2,Battery,37.04,90,60,73,89,120,70,Unhealthy,84
+5426,2025-11-12 10:20:00,4,Blood Pressure,37.1,140,90,91,86,120,80,Healthy,88
+6575,2025-11-12 10:22:00,1,Battery,37.4,140,90,97,80,120,70,Unhealthy,80
+9322,2025-11-12 10:25:00,3,Blood Pressure,37.2,150,95,92,98,120,80,Unhealthy,83
+2685,2025-11-12 10:27:00,4,Battery,37.3,120,80,82,95,120,90,Healthy,82
+1769,2025-11-12 10:29:00,1,Heart Rate,36.8,150,95,74,98,120,90,Unhealthy,81
+7949,2025-11-12 10:31:00,1,Heart Rate,36.7,120,80,92,83,120,80,Healthy,87
+3433,2025-11-12 10:33:00,2,Heart Rate,37.3,150,95,84,97,150,80,Unhealthy,88
+6311,2025-11-12 10:35:00,3,Battery,37.3,130,85,76,91,140,70,Healthy,81
+6051,2025-11-12 10:37:00,3,Blood Pressure,37.5,130,85,92,80,140,70,Healthy,93
+7420,2025-11-12 10:39:00,2,Blood Pressure,36.9,130,85,61,94,120,80,Healthy,93
