@@ -358,50 +358,49 @@ Healthcare Analytics
 
 # 📸 Application Screenshots
 
-The following screenshots demonstrate the complete Remote Patient Monitoring workflow, from user authentication through patient monitoring and healthcare analytics.
+The following screenshots demonstrate the complete Remote Patient Monitoring workflow, from secure authentication to patient monitoring and healthcare analytics.
 
 ---
 
 ## Login
 
-The application provides secure authentication for healthcare professionals and patients through dedicated login portals.
+Healthcare professionals and patients securely authenticate through dedicated login portals.
 
 <p align="center">
-  <img src="docs/screenshots/login.png" width="1000" alt="Login Page"/>
+  <img src="./docs/screenshots/login.png" alt="Login Page" width="1000"/>
 </p>
 
 ---
 
 ## Doctor Dashboard
 
-The Doctor Dashboard provides clinicians with a centralized overview of remotely monitored patients, current health status, vital signs, and patient summaries.
+The Doctor Dashboard provides clinicians with a centralized overview of remotely monitored patients, health status, vital signs, and monitoring summaries.
 
 <p align="center">
-  <img src="docs/screenshots/doctor-dashboard.png" width="1000" alt="Doctor Dashboard"/>
+  <img src="./docs/screenshots/doctor-dashboard.png" alt="Doctor Dashboard" width="1000"/>
 </p>
 
 ---
 
 ## Patient Dashboard
 
-The Patient Dashboard enables patients to review their latest health measurements, historical trends, and personal monitoring information in an easy-to-understand interface.
+The Patient Dashboard enables patients to review their latest health metrics, historical readings, and overall monitoring information.
 
 <p align="center">
-  <img src="docs/screenshots/patient-dashboard.png" width="1000" alt="Patient Dashboard"/>
+  <img src="./docs/screenshots/patient-dashboard.png" alt="Patient Dashboard" width="1000"/>
 </p>
 
 ---
 
-## Healthcare Analytics
+## Health Analytics
 
-Interactive visualizations display trends in blood pressure, heart rate, temperature, and device battery level, helping clinicians monitor patient health over time.
+Interactive charts visualize trends in blood pressure, heart rate, temperature, and device battery level to support continuous patient monitoring.
 
 <p align="center">
-  <img src="docs/screenshots/charts.png" width="1000" alt="Healthcare Analytics"/>
+  <img src="./docs/screenshots/charts.png" alt="Healthcare Analytics" width="1000"/>
 </p>
 
 ---
-
 ---
 
 # 🚀 Deployment
