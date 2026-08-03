@@ -28,15 +28,16 @@ A full-stack healthcare monitoring application that enables clinicians and patie
 
 # 🚀 Live Demo
 
-### Frontend
+### 🌐 Frontend
 
 https://rpm-frontend.onrender.com/
 
-### GitHub Repository
+### 💻 GitHub Repository
 
 https://github.com/Shekhar0419/rpm-dashboard
 
-> **Note:** The current public deployment showcases the application's interface. The production authentication flow is still being finalized.
+> **Note:** The application is deployed on Render. If the backend has been idle, the first request may take 30–60 seconds while the service wakes up on the free hosting tier.
+
 
 ---
 
@@ -357,57 +358,49 @@ Healthcare Analytics
 
 # 📸 Application Screenshots
 
-The following screenshots demonstrate the complete workflow of the Remote Patient Monitoring Platform, from user authentication through patient monitoring, healthcare analytics, and clinical dashboards.
+The following screenshots demonstrate the complete Remote Patient Monitoring workflow, from user authentication through patient monitoring and healthcare analytics.
 
 ---
 
 ## Login
 
-Users can securely access the application through dedicated authentication interfaces for doctors and patients.
+The application provides secure authentication for healthcare professionals and patients through dedicated login portals.
 
 <p align="center">
-  <img src="docs/screenshots/login.png" width="1000">
+  <img src="docs/screenshots/login.png" width="1000" alt="Login Page"/>
 </p>
 
 ---
 
 ## Doctor Dashboard
 
-The Doctor Dashboard provides healthcare professionals with an overview of all patients, enabling quick access to patient information, health metrics, and clinical monitoring.
+The Doctor Dashboard provides clinicians with a centralized overview of remotely monitored patients, current health status, vital signs, and patient summaries.
 
 <p align="center">
-  <img src="docs/screenshots/doctor-dashboard.png" width="1000">
+  <img src="docs/screenshots/doctor-dashboard.png" width="1000" alt="Doctor Dashboard"/>
 </p>
 
 ---
 
 ## Patient Dashboard
 
-Patients can monitor their own health information, review recent measurements, and visualize historical health trends.
+The Patient Dashboard enables patients to review their latest health measurements, historical trends, and personal monitoring information in an easy-to-understand interface.
 
 <p align="center">
-  <img src="docs/screenshots/patient-dashboard.png" width="1000">
-</p>
-
----
-
-## Patient Details
-
-The Patient Details page displays comprehensive health information for an individual patient, including demographic information, vital signs, and historical measurements.
-
-<p align="center">
-  <img src="docs/screenshots/patient-details.png" width="1000">
+  <img src="docs/screenshots/patient-dashboard.png" width="1000" alt="Patient Dashboard"/>
 </p>
 
 ---
 
 ## Healthcare Analytics
 
-Interactive charts visualize patient measurements over time, helping clinicians identify trends and support informed medical decisions.
+Interactive visualizations display trends in blood pressure, heart rate, temperature, and device battery level, helping clinicians monitor patient health over time.
 
 <p align="center">
-  <img src="docs/screenshots/charts.png" width="1000">
+  <img src="docs/screenshots/charts.png" width="1000" alt="Healthcare Analytics"/>
 </p>
+
+---
 
 ---
 
