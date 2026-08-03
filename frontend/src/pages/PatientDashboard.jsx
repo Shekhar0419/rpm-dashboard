@@ -3,9 +3,11 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import MetricCard from "../charts/MetricCard.jsx";
 import LineChart from "../charts/LineChart.jsx";
+import { API } from "../config.js";
 
 const PatientDashboard = () => {
   const { patientId } = useParams();
+
   const [patient, setPatient] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -13,36 +15,75 @@ const PatientDashboard = () => {
   useEffect(() => {
     const fetchPatient = async () => {
       try {
-        const res = await axios.get(`/api/patients/${patientId}`);
+        setError("");
+
+        const res = await axios.get(
+          `${API}/api/patients/${patientId}`
+        );
+
         setPatient(res.data);
       } catch (err) {
-        setError("Failed to load patient data");
+        console.error("Failed to load patient data:", err);
+
+        setError(
+          err.response?.data?.message ||
+            "Failed to load patient data."
+        );
       } finally {
         setLoading(false);
       }
     };
+
     fetchPatient();
   }, [patientId]);
 
-  if (loading) return <p className="page">Loading patient data…</p>;
-  if (error) return <p className="page error-text">{error}</p>;
-  if (!patient) return <p className="page">No data for this patient.</p>;
+  if (loading) {
+    return (
+      <p className="page">
+        Loading patient data...
+      </p>
+    );
+  }
+
+  if (error) {
+    return (
+      <p className="page error-text">
+        {error}
+      </p>
+    );
+  }
+
+  if (!patient) {
+    return (
+      <p className="page">
+        No data for this patient.
+      </p>
+    );
+  }
 
   const { summary, records } = patient;
 
-  // map timestamps to readable strings for charts
-  const chartData = records.map((r) => ({
-    ...r,
-    tsLabel: new Date(r.timestamp).toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit"
-    })
+  const chartData = records.map((record) => ({
+    ...record,
+
+    tsLabel: new Date(record.timestamp).toLocaleTimeString(
+      [],
+      {
+        hour: "2-digit",
+        minute: "2-digit",
+      }
+    ),
   }));
 
   return (
     <div className="page">
-      <h1>Patient Portal – ID {patientId}</h1>
-      <p className="page-subtitle">View your recent remote monitoring data.</p>
+      <h1>
+        Patient Portal – ID {patientId}
+      </h1>
+
+      <p className="page-subtitle">
+        View your recent remote monitoring data.
+      </p>
 
       <div className="metrics-row">
         <MetricCard
@@ -50,44 +91,58 @@ const PatientDashboard = () => {
           value={`${summary.latest_systolic_bp}/${summary.latest_diastolic_bp}`}
           unit="mmHg"
         />
+
         <MetricCard
           title="Latest Heart Rate"
           value={summary.latest_heart_rate}
           unit="bpm"
         />
+
         <MetricCard
           title="Latest Temperature"
-          value={summary.latest_temperature.toFixed(1)}
+          value={Number(summary.latest_temperature).toFixed(1)}
           unit="°C"
         />
+
         <MetricCard
           title="Device Battery"
           value={summary.latest_battery_level}
           unit="%"
-          variant={summary.latest_battery_level < 30 ? "warning" : "success"}
+          variant={
+            summary.latest_battery_level < 30
+              ? "warning"
+              : "success"
+          }
         />
       </div>
 
       <div className="metrics-row">
         <MetricCard
           title="Avg Heart Rate"
-          value={summary.avg_heart_rate.toFixed(1)}
+          value={Number(summary.avg_heart_rate).toFixed(1)}
           unit="bpm"
         />
+
         <MetricCard
           title="Avg Systolic BP"
-          value={summary.avg_systolic_bp.toFixed(1)}
+          value={Number(summary.avg_systolic_bp).toFixed(1)}
           unit="mmHg"
         />
+
         <MetricCard
           title="Avg Diastolic BP"
-          value={summary.avg_diastolic_bp.toFixed(1)}
+          value={Number(summary.avg_diastolic_bp).toFixed(1)}
           unit="mmHg"
         />
+
         <MetricCard
           title="Latest Status"
           value={summary.latest_health_status}
-          variant={summary.latest_health_status === "Healthy" ? "success" : "warning"}
+          variant={
+            summary.latest_health_status === "Healthy"
+              ? "success"
+              : "warning"
+          }
         />
       </div>
 
@@ -100,6 +155,7 @@ const PatientDashboard = () => {
           y2Key="diastolic_bp"
           yLabel="mmHg"
         />
+
         <LineChart
           title="Heart Rate Trend"
           data={chartData}
@@ -107,6 +163,7 @@ const PatientDashboard = () => {
           yKey="heart_rate"
           yLabel="bpm"
         />
+
         <LineChart
           title="Device Battery Trend"
           data={chartData}
