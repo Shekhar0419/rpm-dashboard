@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API } from "../config.js";
 
 const LoginPage = () => {
   const [mode, setMode] = useState("doctor");
@@ -8,36 +9,64 @@ const LoginPage = () => {
   const [doctorPassword, setDoctorPassword] = useState("12345");
   const [patientId, setPatientId] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleDoctorLogin = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
+
     try {
-      const res = await axios.post("/api/login/doctor", {
-        email: doctorEmail,
-        password: doctorPassword
+      const res = await axios.post(`${API}/api/login/doctor`, {
+        email: doctorEmail.trim(),
+        password: doctorPassword,
       });
+
       if (res.data.ok) {
         navigate("/doctor");
+      } else {
+        setError(res.data.message || "Login failed");
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
+      console.error("Doctor login failed:", err);
+
+      setError(
+        err.response?.data?.message ||
+          "Unable to connect to the backend."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
   const handlePatientLogin = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
+
     try {
-      const res = await axios.post("/api/login/patient", {
-        patientId: patientId.trim()
+      const cleanPatientId = patientId.trim();
+
+      const res = await axios.post(`${API}/api/login/patient`, {
+        patientId: cleanPatientId,
       });
+
       if (res.data.ok) {
-        navigate(`/patient/${patientId.trim()}`);
+        navigate(`/patient/${cleanPatientId}`);
+      } else {
+        setError(res.data.message || "Login failed");
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
+      console.error("Patient login failed:", err);
+
+      setError(
+        err.response?.data?.message ||
+          "Unable to connect to the backend."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -50,6 +79,7 @@ const LoginPage = () => {
 
       <div className="tab-toggle">
         <button
+          type="button"
           className={mode === "doctor" ? "tab active" : "tab"}
           onClick={() => {
             setMode("doctor");
@@ -58,7 +88,9 @@ const LoginPage = () => {
         >
           Doctor Portal
         </button>
+
         <button
+          type="button"
           className={mode === "patient" ? "tab active" : "tab"}
           onClick={() => {
             setMode("patient");
@@ -71,52 +103,83 @@ const LoginPage = () => {
 
       {mode === "doctor" ? (
         <form className="form" onSubmit={handleDoctorLogin}>
-          <label>
+          <label htmlFor="doctor-email">
             Doctor Email
-            <input
-              type="email"
-              value={doctorEmail}
-              onChange={(e) => setDoctorEmail(e.target.value)}
-            />
           </label>
-          <label>
+
+          <input
+            id="doctor-email"
+            name="doctorEmail"
+            type="email"
+            value={doctorEmail}
+            onChange={(e) => setDoctorEmail(e.target.value)}
+            required
+          />
+
+          <label htmlFor="doctor-password">
             Password
-            <input
-              type="password"
-              value={doctorPassword}
-              onChange={(e) => setDoctorPassword(e.target.value)}
-            />
           </label>
-          <button type="submit" className="btn primary">
-            Login as Doctor
+
+          <input
+            id="doctor-password"
+            name="doctorPassword"
+            type="password"
+            value={doctorPassword}
+            onChange={(e) => setDoctorPassword(e.target.value)}
+            required
+          />
+
+          <button
+            type="submit"
+            className="btn primary"
+            disabled={loading}
+          >
+            {loading ? "Signing in..." : "Login as Doctor"}
           </button>
         </form>
       ) : (
         <form className="form" onSubmit={handlePatientLogin}>
-          <label>
+          <label htmlFor="patient-id">
             Patient ID
-            <input
-              type="text"
-              placeholder="e.g., 8270"
-              value={patientId}
-              onChange={(e) => setPatientId(e.target.value)}
-            />
           </label>
-          <button type="submit" className="btn primary">
-            Login as Patient
+
+          <input
+            id="patient-id"
+            name="patientId"
+            type="text"
+            placeholder="e.g., 8270"
+            value={patientId}
+            onChange={(e) => setPatientId(e.target.value)}
+            required
+          />
+
+          <button
+            type="submit"
+            className="btn primary"
+            disabled={loading}
+          >
+            {loading ? "Signing in..." : "Login as Patient"}
           </button>
         </form>
       )}
 
-      {error && <p className="error-text">{error}</p>}
+      {error && (
+        <p className="error-text" role="alert">
+          {error}
+        </p>
+      )}
 
       <div className="login-hint">
         <p>
-          <strong>Doctor demo credentials:</strong> doctor@doc.com / 12345
+          <strong>Doctor demo credentials:</strong>{" "}
+          doctor@doc.com / 12345
         </p>
+
         <p>
-          <strong>Sample Patient IDs:</strong> 8270, 1860, 6390, 6191, 6734,
-          7265, 1466, 5426, 6575, 9322, 2685, 1769, 7949, 3433, 6311, 6051, 7420
+          <strong>Sample Patient IDs:</strong>{" "}
+          8270, 1860, 6390, 6191, 6734, 7265, 1466, 5426,
+          6575, 9322, 2685, 1769, 7949, 3433, 6311, 6051,
+          7420
         </p>
       </div>
     </div>
