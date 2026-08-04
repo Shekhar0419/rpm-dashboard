@@ -39,6 +39,7 @@ https://github.com/Shekhar0419/rpm-dashboard
 > **Note:** The application is deployed on Render. If the backend has been idle, the first request may take 30–60 seconds while the service wakes up on the free hosting tier.
 
 
+
 ---
 
 # 📖 Overview
@@ -50,6 +51,9 @@ The application demonstrates a modern healthcare workflow where clinicians can r
 The platform provides separate interfaces for healthcare providers and patients while offering an intuitive workflow for reviewing patient records and monitoring key physiological measurements.
 
 ---
+<p align="center">
+  <img src="./docs/architecture.png" width="1000" alt="Remote Patient Monitoring Architecture"/>
+</p>
 
 # ✨ Key Features
 
